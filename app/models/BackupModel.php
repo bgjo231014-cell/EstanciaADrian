@@ -1,0 +1,65 @@
+<?php
+
+class BackupModel {
+
+    public function generarBackup() {
+
+        $host = "localhost";
+        $user = "root";
+        $pass = "";
+        $db   = "estancia";
+
+        $mysqli = new mysqli($host, $user, $pass, $db);
+        $mysqli->set_charset("utf8mb4");
+
+        $resultadoTablas = $mysqli->query("SHOW TABLES");
+
+        $tablas = [];
+        while ($row = $resultadoTablas->fetch_row()) {
+            $tablas[] = $row[0];
+        }
+
+        $sql = "";
+
+        foreach ($tablas as $tabla) {
+
+            // Crear tabla
+            $res = $mysqli->query("SHOW CREATE TABLE `$tabla`");
+            $row = $res->fetch_row();
+            $sql .= "\n\n" . $row[1] . ";\n\n";
+
+            // Datos
+            $resDatos = $mysqli->query("SELECT * FROM `$tabla`");
+
+            while ($fila = $resDatos->fetch_assoc()) {
+
+                $columnas = array_keys($fila);
+                $sql .= "INSERT INTO `$tabla` (`" . implode("`,`", $columnas) . "`) VALUES(";
+
+                $values = [];
+
+                foreach ($fila as $valor) {
+
+                    if (is_null($valor)) {
+                        $values[] = "NULL"; // <-- Manejo correcto
+                    } else {
+                        // escapado correcto
+                        $valorSeguro = addslashes($valor);
+                        $valorSeguro = str_replace("\n", "\\n", $valorSeguro);
+
+                        $values[] = "'" . $valorSeguro . "'";
+                    }
+                }
+
+                $sql .= implode(",", $values) . ");\n";
+            }
+        }
+
+        $fecha = date("Y-m-d_H-i-s");
+        $ruta = "config/backups/respaldo_$fecha.sql";
+
+        file_put_contents($ruta, $sql);
+
+        return $ruta;
+    }
+}

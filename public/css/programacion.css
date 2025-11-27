@@ -1,0 +1,174 @@
+/* ======= PALETA DE COLORES INSTITUCIONALES ======= */
+:root {
+  --morado-cecam: #5e2a84;
+  --verde-cecam: #1b8a5a;
+  --rojo-cecam: #c62828;
+  --amarillo-cecam: #f9a825;
+  --gris-fondo: #f8f9fa;
+  --sombra: rgba(0, 0, 0, 0.1);
+  --texto-gris: #333;
+}
+
+/* ======= ESTILO GLOBAL ======= */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--gris-fondo);
+  color: var(--texto-gris);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+header {
+  background: linear-gradient(90deg, var(--verde-cecam), var(--morado-cecam));
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 3px 8px var(--sombra);
+}
+
+header img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+header h2 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ======= CONTENEDOR ======= */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--sombra);
+  padding: 30px;
+}
+
+/* ======= BOTONES ======= */
+.btn-success {
+  background-color: var(--verde-cecam);
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-success:hover {
+  background-color: #146844;
+  transform: scale(1.05);
+}
+
+.btn-warning {
+  background-color: var(--morado-cecam);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-warning:hover {
+  background-color: #4a1c6d;
+  transform: scale(1.05);
+}
+
+.btn-danger {
+  background-color: var(--rojo-cecam);
+  border: none;
+}
+.btn-danger:hover {
+  background-color: #a31818;
+}
+
+/* ======= TABLAS ======= */
+table {
+  width: 95%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px var(--sombra);
+}
+
+thead {
+  background: var(--morado-cecam);
+  color: white;
+}
+
+th, td {
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f4f1fa;
+}
+
+tbody tr:hover {
+  background-color: var(--verde-cecam);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* ======= ENCABEZADOS DE SECCIÓN ======= */
+h5.bg-warning {
+  background-color: var(--amarillo-cecam) !important;
+  color: #000 !important;
+  padding: 10px 15px;
+  border-radius: 6px;
+  width: 95%;
+  margin: 30px auto 10px auto;
+  font-weight: 600;
+}
+
+/* ======= INPUTS Y FORMULARIOS ======= */
+input.form-control, select.form-select, textarea.form-control {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--morado-cecam);
+  box-shadow: 0 0 5px var(--morado-cecam);
+}
+
+/* ======= MODALES ======= */
+.modal-content {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--sombra);
+}
+
+.modal-header {
+  background: linear-gradient(90deg, var(--morado-cecam), var(--verde-cecam));
+  color: white;
+}
+
+/* ======= FOOTER ======= */
+footer {
+  background-color: var(--verde-cecam);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* ======= EFECTOS VISUALES ======= */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======= HOVER SUAVE EN TABLAS ======= */
+.table-hover tbody tr {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.table-hover tbody tr:hover {
+  transform: scale(1.01);
+}
+
+

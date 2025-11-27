@@ -1,0 +1,28 @@
+/* === Hero principal === */
+.hero {
+    background: url('/Estancia/public/img/hero-bg.jpg') no-repeat center/cover;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+.hero-text h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+}
+
+/* === Sección de presentación === */
+.presentacion {
+    max-width: 800px;
+    margin: 60px auto;
+    text-align: center;
+    line-height: 1.6;
+}

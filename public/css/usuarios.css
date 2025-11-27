@@ -1,0 +1,292 @@
+/* ======================================================
+   ESTILO GENERAL
+   ====================================================== */
+
+body {
+    background-color: #f1f8e9;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+header {
+    background: linear-gradient(90deg, #1b5e20, #2e7d32);
+    color: #fff;
+    text-align: center;
+    padding: 30px 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+header h3 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* ======================================================
+   CONTENEDOR PRINCIPAL
+   ====================================================== */
+
+.container {
+    max-width: 1100px;
+    margin: 25px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h4 {
+    font-weight: 600;
+    color: #1b5e20;
+}
+
+/* ======================================================
+   BOTONES PRINCIPALES
+   ====================================================== */
+
+.btn-add,
+.btn-back {
+    background-color: #388e3c;
+    color: white !important;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.btn-add:hover,
+.btn-back:hover {
+    background-color: #2e7d32;
+    transform: translateY(-2px);
+}
+
+/* ======================================================
+   TABLA
+   ====================================================== */
+
+table {
+    background: #fff;
+    border-radius: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    table-layout: fixed; /* 🔹 Ajusta columnas */
+}
+
+thead {
+    background: #2e7d32;
+    color: white;
+}
+
+th {
+    padding: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 15px;
+    word-break: break-word; /* 🔹 Evita desbordes */
+}
+
+tr:hover {
+    background-color: #f9fff6;
+    transition: background 0.3s ease;
+}
+
+/* ======================================================
+   BOTONES DE ACCIÓN
+   ====================================================== */
+
+.btn {
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-warning {
+    background-color: #ffca28;
+    color: #333;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #fdd835;
+}
+
+.btn-danger {
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c62828;
+}
+
+/* ======================================================
+   MODALES
+   ====================================================== */
+
+.modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header.bg-success {
+    background-color: #2e7d32 !important;
+    color: white;
+}
+
+.modal-header.bg-warning {
+    background-color: #fdd835 !important;
+    color: #000;
+}
+
+.modal-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.modal-body input,
+.modal-body select {
+    border-radius: 6px;
+    border: 1px solid #cfd8dc;
+}
+
+.modal-body input:focus,
+.modal-body select:focus {
+    border-color: #66bb6a;
+    box-shadow: 0 0 5px rgba(102, 187, 106, 0.4);
+}
+
+/* ======================================================
+   FOOTER
+   ====================================================== */
+
+footer {
+    text-align: center;
+    background-color: #1b5e20;
+    color: #fff;
+    padding: 12px 0;
+    font-size: 14px;
+    margin-top: 50px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ======================================================
+   RESPONSIVE PROFESIONAL
+   ====================================================== */
+
+/* Tablets grandes y medianas */
+@media (max-width: 992px) {
+
+    header h3 {
+        font-size: 28px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Tablets y celulares horizontales */
+@media (max-width: 768px) {
+
+    header {
+        padding: 20px 10px;
+    }
+
+    header h3 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 15px !important;
+        margin: 15px;
+    }
+
+    .d-flex {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px;
+    }
+
+    .btn-add,
+    .btn-back {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 12px;
+        table-layout: fixed;
+    }
+
+    th, td {
+        padding: 8px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .modal-content {
+        margin: 10px;
+    }
+}
+
+/* Celulares pequeños */
+@media (max-width: 480px) {
+
+    header h3 {
+        font-size: 18px;
+    }
+
+    th, td {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .btn-add,
+    .btn-back {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}

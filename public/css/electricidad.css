@@ -1,0 +1,26 @@
+.btn-add {
+  background-color: #198754;
+  color: white;
+}
+.btn-add:hover {
+  background-color: #157347;
+  color: white;
+}
+header {
+  background-color: #198754;
+  color: white;
+  padding: 1rem;
+}
+footer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+#noResults {
+  display: none;
+}
+.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}

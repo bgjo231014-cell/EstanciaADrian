@@ -1,0 +1,607 @@
+/* ======= PALETA DE COLORES RSU ======= */
+:root {
+    --verde-cecam: #117a65;
+    --morado-cecam: #6a1b9a;
+    --verde-claro: #d5f5e3;
+    --morado-claro: #ede7f6;
+    --amarillo: #f1c40f;
+    --naranja: #e67e22;
+    --azul: #3498db;
+    --rojo: #e74c3c;
+    --gris-claro: #f9f9f9;
+    --sombra: rgba(0, 0, 0, 0.15);
+    --borde: #e0e0e0;
+}
+
+/* ======= ESTILOS GLOBALES ======= */
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #2c3e50;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(90deg, var(--verde-cecam), var(--morado-cecam));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    opacity: 0.3;
+}
+
+/* ======= CONTENEDOR PRINCIPAL ======= */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin: 30px auto;
+    width: 98%;
+    max-width: 1400px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ======= BOTONES MEJORADOS ======= */
+.btn-success {
+    background: linear-gradient(135deg, var(--verde-cecam), #27ae60);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #0e6655, #229954);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--morado-cecam), #9b59b6);
+    border: none;
+    border-radius: 10px;
+    color: white !important;
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #4a148c, #8e44ad);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--rojo), #c0392b);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+/* ======= TABLAS PROFESIONALES ======= */
+.tabla-container {
+    margin: 25px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--sombra);
+    background: white;
+    border: 1px solid var(--borde);
+}
+
+.tabla-rsu {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.tabla-rsu thead {
+    background: linear-gradient(135deg, var(--morado-cecam), #8e44ad);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tabla-rsu th {
+    padding: 14px 8px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla-rsu td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: middle;
+    transition: all 0.3s ease;
+}
+
+.tabla-rsu tbody tr {
+    transition: all 0.3s ease;
+}
+
+.tabla-rsu tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+.tabla-rsu tbody tr:nth-of-type(odd) {
+    background-color: white;
+}
+
+.tabla-rsu tbody tr:hover {
+    background: linear-gradient(135deg, #e8f5e8, #f0e8ff);
+    transform: scale(1.01);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ======= COLORES PARA TOTALES ======= */
+.tabla-rsu td:nth-child(13) { /* Total Mes */
+    background-color: rgba(52, 152, 219, 0.1);
+    font-weight: 700;
+    color: #2980b9;
+}
+
+.tabla-rsu td:nth-child(14) { /* Total Cuatrimestre */
+    background-color: rgba(46, 204, 113, 0.1);
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.tabla-rsu td:nth-child(15) { /* CO₂ Evitado */
+    background-color: rgba(241, 196, 15, 0.1);
+    font-weight: 700;
+    color: #f39c12;
+}
+
+.tabla-rsu td:nth-child(16) { /* Toneladas */
+    background-color: rgba(155, 89, 182, 0.1);
+    font-weight: 700;
+    color: #8e44ad;
+}
+
+/* ======= BÚSQUEDA ======= */
+.search-container {
+    max-width: 300px;
+    margin: 0 auto 25px auto;
+}
+
+.input-group {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--sombra);
+    transition: all 0.3s ease;
+}
+
+.input-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.input-group-text {
+    background: linear-gradient(135deg, var(--verde-cecam), var(--morado-cecam));
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.form-control {
+    border: 1px solid var(--borde);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: var(--morado-cecam);
+    box-shadow: 0 0 0 0.3rem rgba(106, 27, 154, 0.25);
+    transform: translateY(-1px);
+}
+
+/* ======= GRÁFICAS ======= */
+.grafica-container {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.grafica-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.grafica-header h4 {
+    color: var(--morado-cecam);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.grafica-header p {
+    color: #7f8c8d;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.grafica-wrapper {
+    position: relative;
+    height: 450px;
+    margin: 0 auto;
+}
+
+/* ======= MODALES PROFESIONALES ======= */
+.modal-content {
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    border: none;
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--verde-cecam), var(--morado-cecam));
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 25px;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+.modal-body {
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+.modal-footer {
+    background-color: #ffffff;
+    border-radius: 0 0 16px 16px;
+    padding: 25px;
+    border-top: 1px solid var(--borde);
+}
+
+/* ======= ANIMACIONES ======= */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.highlight {
+    background-color: #fff3cd !important;
+    transition: background-color 0.6s ease;
+}
+
+/* ======= SCROLL PERSONALIZADO ======= */
+.tabla-container::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+.tabla-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.tabla-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--verde-cecam), var(--morado-cecam));
+    border-radius: 4px;
+}
+
+.tabla-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0e6655, #4a148c);
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 1400px) {
+    .tabla-rsu {
+        font-size: 0.75rem;
+    }
+    
+    .tabla-rsu th,
+    .tabla-rsu td {
+        padding: 10px 6px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .tabla-container {
+        overflow-x: auto;
+    }
+    
+    .tabla-rsu {
+        min-width: 1200px;
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 15px auto;
+        padding: 15px 10px;
+        border-radius: 12px;
+    }
+    
+    .grafica-wrapper {
+        height: 350px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    header h3 {
+        font-size: 1.3rem;
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+    }
+    
+    .grafica-wrapper {
+        height: 300px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+}
+
+/* ======= EFECTOS ESPECIALES ======= */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ======= BADGES DE ESTADO ======= */
+.badge-total {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-co2 {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-toneladas {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* ======= ENCABEZADOS DE SECCIÓN ======= */
+.section-header {
+    background: linear-gradient(135deg, var(--amarillo), #f39c12);
+    color: #2c3e50;
+    font-weight: 800;
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin: 30px 0 15px 0;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* ======= TABLA DE MÉTRICAS ======= */
+.tabla-metricas thead {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.tabla-metricas tfoot {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+}
+
+/* ======= TARJETAS DE IMPACTO ======= */
+.impacto-container {
+    margin: 30px 0;
+}
+
+.impacto-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    border-left: 5px solid;
+}
+
+.impacto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.impacto-card.total-reciclado {
+    border-left-color: #3498db;
+}
+
+.impacto-card.co2-evitado {
+    border-left-color: #27ae60;
+}
+
+.impacto-card.toneladas {
+    border-left-color: #9b59b6;
+}
+
+.impacto-card.registros {
+    border-left-color: #e74c3c;
+}
+
+.impacto-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.impacto-content h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.impacto-content p {
+    color: #7f8c8d;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* ======= BARRAS DE PROGRESO ======= */
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* ======= BADGES MEJORADOS ======= */
+.badge-total {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.badge-co2 {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.badge-toneladas {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* ======= BOTONES VERTICALES ======= */
+.btn-group-vertical {
+    gap: 5px;
+}
+
+.btn-group-vertical .btn {
+    border-radius: 8px !important;
+}
+
+.fecha-completa {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #666;
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+    font-weight: 500;
+}
+
+/* ======= RESPONSIVE MEJORADO ======= */
+@media (max-width: 768px) {
+    .section-header {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+    
+    .impacto-content h3 {
+        font-size: 1.4rem;
+    }
+    
+    .impacto-icon {
+        font-size: 2rem;
+    }
+    
+    .btn-group-vertical {
+        flex-direction: row;
+        gap: 5px;
+    }
+}
