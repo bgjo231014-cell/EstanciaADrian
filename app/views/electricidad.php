@@ -28,16 +28,60 @@ $registros = $registros ?? [];
       </a>
   </div>
 
-  <!-- Campo de búsqueda por mes -->
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <div class="input-group">
-        <span class="input-group-text">Mes</span>
-        <input type="month" id="searchInput" class="form-control" 
-               placeholder="Buscar por mes...">
-      </div>
+  <div class="row g-3 mb-4" id="resumenElectricidad">
+  <div class="col-md-3">
+    <div class="card-resumen">
+      <span>Total kW consumidos</span>
+      <strong id="totalKw">0</strong>
     </div>
   </div>
+  <div class="col-md-3">
+    <div class="card-resumen">
+      <span>Costo total</span>
+      <strong id="totalCosto">$0.00</strong>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-resumen">
+      <span>Promedio kW</span>
+      <strong id="promedioKw">0</strong>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-resumen">
+      <span>Mayor consumo</span>
+      <strong id="mayorConsumo">0</strong>
+    </div>
+  </div>
+</div>
+
+<div class="row g-2 mb-3">
+  <div class="col-md-4">
+    <input type="text" id="searchInput" class="form-control" 
+           placeholder="Buscar por mes, costo, consumo o fecha...">
+  </div>
+
+  <div class="col-md-3">
+    <select id="filtroAnio" class="form-select">
+      <option value="">Todos los años</option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <select id="filtroConsumo" class="form-select">
+      <option value="">Todos los consumos</option>
+      <option value="alto">Consumo alto</option>
+      <option value="medio">Consumo medio</option>
+      <option value="bajo">Consumo bajo</option>
+    </select>
+  </div>
+
+  <div class="col-md-2 d-grid">
+    <button type="button" class="btn btn-success" id="btnExportarCSV">
+      Exportar CSV
+    </button>
+  </div>
+</div>
 
   <table class="table table-striped text-center align-middle" id="tablaElectricidad">
     <thead class="table-success">
@@ -99,7 +143,7 @@ $registros = $registros ?? [];
   
   <!-- Mensaje cuando no hay resultados de búsqueda -->
   <div id="noResults" class="alert alert-warning text-center" style="display:none;">
-    No se encontraron registros para ese mes.
+    No se encontraron registros con los filtros seleccionados.
   </div>
 </div>
 

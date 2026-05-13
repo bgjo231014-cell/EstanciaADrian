@@ -1,0 +1,5 @@
+config/backups/
+*.sql
+node_modules/
+vendor/
+.DS_Store

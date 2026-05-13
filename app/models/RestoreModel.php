@@ -14,7 +14,7 @@ class RestoreModel {
             die("Error de conexión: " . $mysqli->connect_error);
         }
 
-        $mysqli->set_charset("utf8");
+        $mysqli->set_charset("utf8mb4");
 
         // 0. APAGAR llaves foráneas
         $mysqli->query("SET FOREIGN_KEY_CHECKS = 0");

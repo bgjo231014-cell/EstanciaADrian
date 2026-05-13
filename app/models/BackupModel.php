@@ -19,14 +19,24 @@ class BackupModel {
             $tablas[] = $row[0];
         }
 
-        $sql = "";
+        $sql = "SET FOREIGN_KEY_CHECKS=0;\n\n";
+        $sql .= "\nSET FOREIGN_KEY_CHECKS=1;\n";
 
         foreach ($tablas as $tabla) {
 
             // Crear tabla
             $res = $mysqli->query("SHOW CREATE TABLE `$tabla`");
             $row = $res->fetch_row();
-            $sql .= "\n\n" . $row[1] . ";\n\n";
+            $createTable = $row[1];
+
+// Quitar constraints FOREIGN KEY para evitar errores al restaurar
+$createTable = preg_replace('/,\s*CONSTRAINT\s+`[^`]+`\s+FOREIGN KEY\s+\([^)]+\)\s+REFERENCES\s+`[^`]+`\s+\([^)]+\)(\s+ON DELETE\s+\w+)?(\s+ON UPDATE\s+\w+)?/i', '', $createTable);
+
+// Quitar comas sobrantes antes del cierre
+$createTable = preg_replace('/,\s*\)/', "\n)", $createTable);
+
+$sql .= "\n\nDROP TABLE IF EXISTS `$tabla`;\n";
+$sql .= $createTable . ";\n\n";
 
             // Datos
             $resDatos = $mysqli->query("SELECT * FROM `$tabla`");
