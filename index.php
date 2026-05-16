@@ -127,7 +127,35 @@ case 'gestion_usuarios':
         elseif ($action === 'eliminar')   $controller->eliminar();
         else                              $controller->index();
         break;
+    // =======================================
+    //  MODULO: GESTIÓN DE SANCIONES
+    // =======================================
+    case 'sanciones':
+        require_once $controllersPath . 'SancionController.php';
+        $controller = new SancionController($connection);
 
+        if ($action === 'agregar')              $controller->agregar();
+        elseif ($action === 'editar')           $controller->editar();
+        elseif ($action === 'eliminar')         $controller->eliminar();
+        elseif ($action === 'liberar')          $controller->liberarHoras();
+        elseif ($action === 'historial')        $controller->historial();
+        elseif ($action === 'congelar')         $controller->congelar();
+        elseif ($action === 'reactivar')        $controller->reactivar();
+        else                                    $controller->admin();
+        break;
+
+    // =======================================
+    //  CONSULTA PÚBLICA DE SANCIONES
+    // =======================================
+    case 'consulta_sancion':
+
+    require_once "app/controllers/SancionController.php";
+
+    $controller = new SancionController();
+
+    $controller->consultaPublica();
+
+break;
                 // =======================================
     //  MODULO: GESTIÓN DE RSU
     // =======================================
