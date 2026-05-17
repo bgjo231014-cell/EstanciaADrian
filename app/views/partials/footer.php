@@ -1,7 +1,7 @@
 </main>
 
 <footer>
-    © 2025 CECAM | Centro Ecológico de Conciencia Ambiental
+   <center> © 2025 CECAM | Centro Ecológico de Conciencia Ambiental</center>
 </footer>
 
 <script src="public/javascript/main.js"></script>

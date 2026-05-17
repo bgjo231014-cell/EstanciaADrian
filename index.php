@@ -63,14 +63,21 @@ switch ($view) {
     //  MODULO: GESTIÓN DE CAPACITACIÓN 
     // =======================================
     case 'capacitacion':
-        require_once $controllersPath . 'CapacitacionController.php';
-        $controller = new CapacitacionController($connection);
+    require_once $controllersPath . 'CapacitacionController.php';
+    $controller = new CapacitacionController($connection);
 
-        if ($action === 'agregar') $controller->agregar();
-        elseif ($action === 'editar') $controller->editar();
-        elseif ($action === 'eliminar') $controller->eliminar();
-        else $controller->index();
-        break;
+    if ($action === 'crear') {
+        $controller->crear();
+    } elseif ($action === 'agregar') {
+        $controller->agregar();
+    } elseif ($action === 'editar') {
+        $controller->editar();
+    } elseif ($action === 'eliminar') {
+        $controller->eliminar();
+    } else {
+        $controller->index();
+    }
+    break;
 
     // =======================================
     //  MODULO: GESTIÓN DE COMUNIDAD

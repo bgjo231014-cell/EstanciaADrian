@@ -102,26 +102,23 @@ class ComunidadController
     {
         $data = [];
 
-        // Año: solo número entero
+        // Datos generales
         $data['año'] = isset($post['año']) ? (int) $post['año'] : 0;
+        $data['mes'] = trim($post['mes'] ?? '');
+        $data['descripcion'] = trim($post['descripcion'] ?? '');
 
-        // Meses como texto
-        $data['mes_1'] = trim($post['mes_1'] ?? '');
-        $data['mes_2'] = trim($post['mes_2'] ?? '');
-        $data['mes_3'] = trim($post['mes_3'] ?? '');
-
-        // Todos los campos numéricos
+        // Campos numéricos nuevos
         $camposNumericos = [
-            'admvo_1','admvo_2','admvo_3',
-            'ptc_1','ptc_2','ptc_3',
-            'honorarios_1','honorarios_2','honorarios_3',
-            'pa_1','pa_2','pa_3',
-            'jardin_1','jardin_2','jardin_3',
-            'limpieza_1','limpieza_2','limpieza_3',
-            'mantto_1','mantto_2','mantto_3',
-            'vigilancia_1','vigilancia_2','vigilancia_3',
-            'licenciatura_1','licenciatura_2','licenciatura_3',
-            'posgrado_1','posgrado_2','posgrado_3'
+            'admvos',
+            'ptcs',
+            'honorarios',
+            'pa',
+            'jardineros',
+            'limpieza',
+            'maestros',
+            'vigilancias',
+            'licenciaturas',
+            'posgrados'
         ];
 
         foreach ($camposNumericos as $campo) {

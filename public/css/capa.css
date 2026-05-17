@@ -534,3 +534,58 @@ footer {
 
 .rounded-lg { border-radius: 12px; }
 .rounded-xl { border-radius: 16px; }
+
+/* ======= SCROLL SOLO PARA LA TABLA DE CAPACITACIÓN ======= */
+
+.table-scroll-capacitacion {
+  width: 100%;
+  max-height: 430px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+/* Tabla ancha para mantener scroll horizontal */
+.table-scroll-capacitacion .tabla-capacitacion {
+  min-width: 2100px;
+  width: max-content;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+/* Encabezado fijo mientras bajas dentro de la tabla */
+.table-scroll-capacitacion .tabla-capacitacion thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #d5f5e3;
+}
+
+/* La descripción sí puede partirse en varias líneas */
+.table-scroll-capacitacion .tabla-capacitacion td:nth-child(3) {
+  min-width: 200px;
+  max-width: 230px;
+  white-space: normal;
+}
+
+/* Scroll más visible */
+.table-scroll-capacitacion::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+.table-scroll-capacitacion::-webkit-scrollbar-track {
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+.table-scroll-capacitacion::-webkit-scrollbar-thumb {
+  background: #6a1b9a;
+  border-radius: 10px;
+}
+
+.table-scroll-capacitacion::-webkit-scrollbar-thumb:hover {
+  background: #117a65;
+}

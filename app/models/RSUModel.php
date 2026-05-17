@@ -46,28 +46,27 @@ class RSUModel
         }
 
         // Materiales
-        $papel      = $this->num($data, 'papel_kg');
-        $periodico  = $this->num($data, 'periodico_kg');
-        $toalla     = $this->num($data, 'toalla_manos_kg');
-        $carton     = $this->num($data, 'carton_kg');
-        $pet        = $this->num($data, 'pet_kg');
-        $otros_plas = $this->num($data, 'otros_plasticos_kg');
-        $vidrio     = $this->num($data, 'vidrio_kg');
-        $aluminio   = $this->num($data, 'aluminio_kg');
-        $hojalata   = $this->num($data, 'hojalata_kg');
-        $fierro     = $this->num($data, 'fierro_kg');
+        $basura          = $this->num($data, 'basura_kg');
+        $basura_organica = $this->num($data, 'basura_organica_kg');
+        $papel           = $this->num($data, 'papel_kg');
+        $carton          = $this->num($data, 'carton_kg');
+        $pet             = $this->num($data, 'pet_kg');
+        $otros_plas      = $this->num($data, 'otros_plasticos_kg');
+        $vidrio          = $this->num($data, 'vidrio_kg');
+        $aluminio        = $this->num($data, 'aluminio_kg');
+        $hojalata        = $this->num($data, 'hojalata_kg');
+        $fierro          = $this->num($data, 'fierro_kg');
 
         // Totales básicos
-        $total_registro = $papel + $periodico + $toalla + $carton + $pet +
+        $total_registro = $basura + $basura_organica + $papel + $carton + $pet +
                           $otros_plas + $vidrio + $aluminio + $hojalata + $fierro;
 
-        // Por ahora dejamos estos acumulados en 0 o derivados simples
-        $total_cuatrimestre              = 0.0;
-        $kg_co2_persona_cuatrimestre     = 0.0;
-        $tn_cuatrimestre                 = $total_registro / 1000.0;
+        $total_cuatrimestre          = 0.0;
+        $kg_co2_persona_cuatrimestre = 0.0;
+        $tn_cuatrimestre             = $total_registro / 1000.0;
 
         $sql = "INSERT INTO rsu
-                (mes, papel_kg, periodico_kg, toalla_manos_kg, carton_kg, pet_kg,
+                (mes, basura_kg, basura_organica_kg, papel_kg, carton_kg, pet_kg,
                  otros_plasticos_kg, vidrio_kg, aluminio_kg, hojalata_kg, fierro_kg,
                  total_registro, total_cuatrimestre, kg_co2_persona_cuatrimestre, tn_cuatrimestre)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -80,9 +79,9 @@ class RSUModel
         $stmt->bind_param(
             "sdddddddddddddd",
             $mes,
+            $basura,
+            $basura_organica,
             $papel,
-            $periodico,
-            $toalla,
             $carton,
             $pet,
             $otros_plas,
@@ -97,11 +96,12 @@ class RSUModel
         );
 
         $ok = $stmt->execute();
+
         if (!$ok) {
             error_log("Error ejecutar INSERT RSU: " . $stmt->error);
         }
-        $stmt->close();
 
+        $stmt->close();
         return $ok;
     }
 
@@ -109,94 +109,94 @@ class RSUModel
        ACTUALIZAR REGISTRO
     ============================ */
     public function actualizarRegistro(array $data): bool
-{
-    // ID validado previamente en el controlador, pero reforzamos aquí
-    $id = isset($data['id']) ? (int)$data['id'] : 0;
-    if ($id <= 0) {
-        error_log("RSUModel::actualizarRegistro() -> ID inválido: " . ($data['id'] ?? 'null'));
-        return false;
+    {
+        $id = isset($data['id']) ? (int)$data['id'] : 0;
+
+        if ($id <= 0) {
+            error_log("RSUModel::actualizarRegistro() -> ID inválido: " . ($data['id'] ?? 'null'));
+            return false;
+        }
+
+        $mes = $data['mes'] ?? '';
+
+        if (empty($mes) || !strtotime($mes)) {
+            error_log("RSUModel::actualizarRegistro() -> mes inválido: " . $mes);
+            return false;
+        }
+
+        // Materiales
+        $basura          = $this->num($data, 'basura_kg');
+        $basura_organica = $this->num($data, 'basura_organica_kg');
+        $papel           = $this->num($data, 'papel_kg');
+        $carton          = $this->num($data, 'carton_kg');
+        $pet             = $this->num($data, 'pet_kg');
+        $otros_plas      = $this->num($data, 'otros_plasticos_kg');
+        $vidrio          = $this->num($data, 'vidrio_kg');
+        $aluminio        = $this->num($data, 'aluminio_kg');
+        $hojalata        = $this->num($data, 'hojalata_kg');
+        $fierro          = $this->num($data, 'fierro_kg');
+
+        $total_registro = $basura + $basura_organica + $papel + $carton + $pet +
+                          $otros_plas + $vidrio + $aluminio + $hojalata + $fierro;
+
+        $total_cuatrimestre          = 0.0;
+        $kg_co2_persona_cuatrimestre = 0.0;
+        $tn_cuatrimestre             = $total_registro / 1000.0;
+
+        $sql = "UPDATE rsu SET
+                    mes = ?,
+                    basura_kg = ?,
+                    basura_organica_kg = ?,
+                    papel_kg = ?,
+                    carton_kg = ?,
+                    pet_kg = ?,
+                    otros_plasticos_kg = ?,
+                    vidrio_kg = ?,
+                    aluminio_kg = ?,
+                    hojalata_kg = ?,
+                    fierro_kg = ?,
+                    total_registro = ?,
+                    total_cuatrimestre = ?,
+                    kg_co2_persona_cuatrimestre = ?,
+                    tn_cuatrimestre = ?
+                WHERE id = ?";
+
+        if (!$stmt = $this->conn->prepare($sql)) {
+            error_log("Error preparar UPDATE RSU: " . $this->conn->error);
+            return false;
+        }
+
+        $stmt->bind_param(
+            "sddddddddddddddi",
+            $mes,
+            $basura,
+            $basura_organica,
+            $papel,
+            $carton,
+            $pet,
+            $otros_plas,
+            $vidrio,
+            $aluminio,
+            $hojalata,
+            $fierro,
+            $total_registro,
+            $total_cuatrimestre,
+            $kg_co2_persona_cuatrimestre,
+            $tn_cuatrimestre,
+            $id
+        );
+
+        $ok = $stmt->execute();
+
+        if (!$ok) {
+            error_log("Error ejecutar UPDATE RSU: " . $stmt->error);
+        } else {
+            error_log("RSUModel::actualizarRegistro() -> filas afectadas: " . $stmt->affected_rows);
+        }
+
+        $stmt->close();
+        return $ok;
     }
-
-    $mes = $data['mes'] ?? '';
-    if (empty($mes) || !strtotime($mes)) {
-        error_log("RSUModel::actualizarRegistro() -> mes inválido: " . $mes);
-        return false;
-    }
-
-    // Materiales
-    $papel      = $this->num($data, 'papel_kg');
-    $periodico  = $this->num($data, 'periodico_kg');
-    $toalla     = $this->num($data, 'toalla_manos_kg');
-    $carton     = $this->num($data, 'carton_kg');
-    $pet        = $this->num($data, 'pet_kg');
-    $otros_plas = $this->num($data, 'otros_plasticos_kg');
-    $vidrio     = $this->num($data, 'vidrio_kg');
-    $aluminio   = $this->num($data, 'aluminio_kg');
-    $hojalata   = $this->num($data, 'hojalata_kg');
-    $fierro     = $this->num($data, 'fierro_kg');
-
-    $total_registro = $papel + $periodico + $toalla + $carton + $pet +
-                      $otros_plas + $vidrio + $aluminio + $hojalata + $fierro;
-
-    $total_cuatrimestre          = 0.0;
-    $kg_co2_persona_cuatrimestre = 0.0;
-    $tn_cuatrimestre             = $total_registro / 1000.0;
-
-    $sql = "UPDATE rsu SET
-                mes = ?,
-                papel_kg = ?,
-                periodico_kg = ?,
-                toalla_manos_kg = ?,
-                carton_kg = ?,
-                pet_kg = ?,
-                otros_plasticos_kg = ?,
-                vidrio_kg = ?,
-                aluminio_kg = ?,
-                hojalata_kg = ?,
-                fierro_kg = ?,
-                total_registro = ?,
-                total_cuatrimestre = ?,
-                kg_co2_persona_cuatrimestre = ?,
-                tn_cuatrimestre = ?
-            WHERE id = ?";
-
-    if (!$stmt = $this->conn->prepare($sql)) {
-        error_log("Error preparar UPDATE RSU: " . $this->conn->error);
-        return false;
-    }
-
-    $stmt->bind_param(
-        "sddddddddddddddi",
-        $mes,
-        $papel,
-        $periodico,
-        $toalla,
-        $carton,
-        $pet,
-        $otros_plas,
-        $vidrio,
-        $aluminio,
-        $hojalata,
-        $fierro,
-        $total_registro,
-        $total_cuatrimestre,
-        $kg_co2_persona_cuatrimestre,
-        $tn_cuatrimestre,
-        $id
-    );
-
-    $ok = $stmt->execute();
-
-    if (!$ok) {
-        error_log("Error ejecutar UPDATE RSU: " . $stmt->error);
-    } else {
-        error_log("RSUModel::actualizarRegistro() -> filas afectadas: " . $stmt->affected_rows);
-    }
-
-    $stmt->close();
-    return $ok;
-}
-
 
     /* ============================
        ELIMINAR REGISTRO
@@ -211,23 +211,26 @@ class RSUModel
         }
 
         $stmt->bind_param("i", $id);
+
         $ok = $stmt->execute();
+
         if (!$ok) {
             error_log("Error ejecutar DELETE RSU: " . $stmt->error);
         }
-        $stmt->close();
 
+        $stmt->close();
         return $ok;
     }
 
     /* ============================
-       OBTENER POR ID (opcional)
+       OBTENER POR ID
     ============================ */
     public function obtenerRegistroPorId(int $id): ?array
     {
         if ($id <= 0) return null;
 
         $sql = "SELECT * FROM rsu WHERE id = ?";
+
         if (!$stmt = $this->conn->prepare($sql)) {
             error_log("Error preparar SELECT RSU por ID: " . $this->conn->error);
             return null;
@@ -235,8 +238,10 @@ class RSUModel
 
         $stmt->bind_param("i", $id);
         $stmt->execute();
+
         $res = $stmt->get_result();
         $row = $res->fetch_assoc() ?: null;
+
         $stmt->close();
 
         return $row;

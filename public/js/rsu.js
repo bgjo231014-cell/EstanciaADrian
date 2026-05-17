@@ -1,11 +1,11 @@
 // public/js/rsu.js
 
-//  Declaración GLOBAL (solo una vez)
+// Declaración GLOBAL
 let graficaGlobal = null;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log(" RSU.JS SE ESTÁ EJECUTANDO");
+    console.log("RSU.JS SE ESTÁ EJECUTANDO");
 
     inicializarBotonesEditar();
     inicializarBusqueda();
@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("edit_mes").value = fila.dataset.mes || "";
 
                 const campos = [
+                    "basura_kg",
+                    "basura_organica_kg",
                     "papel_kg",
-                    "periodico_kg",
-                    "toalla_manos_kg",
                     "carton_kg",
                     "pet_kg",
                     "otros_plasticos_kg",
@@ -93,9 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const datos = obtenerDatosDeTablas();
 
         const arregloDatos = [
+            datos.basura,
+            datos.basuraOrganica,
             datos.papel,
-            datos.periodico,
-            datos.toallas,
             datos.carton,
             datos.pet,
             datos.otrosPlasticos,
@@ -109,27 +109,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!tieneDatos) {
             canvas.parentNode.innerHTML =
-                '<div class="alert alert-info text-center"> No hay datos para la gráfica.</div>';
+                '<div class="alert alert-info text-center">No hay datos para la gráfica.</div>';
             return;
         }
 
-        // destruir gráfica previa
+        // Destruir gráfica previa
         if (graficaGlobal) graficaGlobal.destroy();
 
         graficaGlobal = new Chart(canvas, {
             type: "pie",
             data: {
                 labels: [
-                    " Papel", " Periódico", " Toallas", " Cartón",
-                    " PET", " Otros Plásticos", " Vidrio",
-                    " Aluminio", " Hojalata", "Fierro"
+                    "Basura",
+                    "Basura orgánica",
+                    "Papel",
+                    "Cartón",
+                    "PET",
+                    "Otros Plásticos",
+                    "Vidrio",
+                    "Aluminio",
+                    "Hojalata",
+                    "Fierro"
                 ],
                 datasets: [{
                     data: arregloDatos,
                     backgroundColor: [
-                        "#3498db", "#2980b9", "#1abc9c", "#27ae60",
-                        "#f1c40f", "#f39c12", "#e74c3c", "#e67e22",
-                        "#9b59b6", "#34495e"
+                        "#7f8c8d",
+                        "#2ecc71",
+                        "#3498db",
+                        "#27ae60",
+                        "#f1c40f",
+                        "#f39c12",
+                        "#e74c3c",
+                        "#e67e22",
+                        "#9b59b6",
+                        "#34495e"
                     ],
                     borderColor: "#fff",
                     borderWidth: 2,
@@ -168,9 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const filas2 = document.querySelectorAll(".tabla-rsu-2 tbody tr");
 
         let datos = {
+            basura: 0,
+            basuraOrganica: 0,
             papel: 0,
-            periodico: 0,
-            toallas: 0,
             carton: 0,
             pet: 0,
             otrosPlasticos: 0,
@@ -182,12 +196,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         filas1.forEach(fila => {
             if (fila.style.display === "none") return;
+
             const c = fila.querySelectorAll("td");
+
+            /*
+              Orden esperado en la tabla 1:
+              td[0] = acciones o algún dato antes
+              td[1] = basura
+              td[2] = basura orgánica
+              td[3] = papel
+              td[4] = cartón
+              td[5] = PET
+              td[6] = otros plásticos
+              td[7] = vidrio
+              td[8] = aluminio
+            */
+
             if (c.length < 9) return;
 
-            datos.papel += parseFloat(c[1].textContent) || 0;
-            datos.periodico += parseFloat(c[2].textContent) || 0;
-            datos.toallas += parseFloat(c[3].textContent) || 0;
+            datos.basura += parseFloat(c[1].textContent) || 0;
+            datos.basuraOrganica += parseFloat(c[2].textContent) || 0;
+            datos.papel += parseFloat(c[3].textContent) || 0;
             datos.carton += parseFloat(c[4].textContent) || 0;
             datos.pet += parseFloat(c[5].textContent) || 0;
             datos.otrosPlasticos += parseFloat(c[6].textContent) || 0;
@@ -197,6 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         filas2.forEach(fila => {
             if (fila.style.display === "none") return;
+
             const c = fila.querySelectorAll("td");
 
             datos.hojalata += parseFloat(c[0].textContent) || 0;

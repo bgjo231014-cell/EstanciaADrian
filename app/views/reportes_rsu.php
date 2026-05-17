@@ -2,12 +2,12 @@
 
 <div class="container mt-4">
     <h3 class="text-center text-warning mb-4">
-        Reporte de Residuos Sólidos Urbanos (RSU)
+        Reporte de Residuos de Manejo Especial (RME)
     </h3>
 
     <div class="card shadow mb-4">
         <div class="card-header bg-warning text-white">
-            <h5 class="mb-0">Resumen Anual de RSU</h5>
+            <h5 class="mb-0">Resumen Anual de RME</h5>
         </div>
         <div class="card-body">
             <?php if (empty($datos)): ?>
@@ -39,7 +39,7 @@
 
     <div class="card shadow mb-5">
         <div class="card-header bg-dark text-white">
-            <h5 class="mb-0">Gráfica de RSU por Año</h5>
+            <h5 class="mb-0">Gráfica  por Año</h5>
         </div>
         <div class="card-body">
             <canvas id="graficaRSUReporte" height="120"></canvas>

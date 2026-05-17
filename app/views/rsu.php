@@ -41,7 +41,7 @@ function mes_anio_ES($fecha)
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión RSU - CECAM</title>
+    <title>RME (Residuos de Manejo Especial)- CECAM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/rsu.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -49,14 +49,14 @@ function mes_anio_ES($fecha)
 <body>
 
 <header class="bg-success text-white text-center py-3">
-    <h3>CECAM - Gestión de Residuos Sólidos Urbanos (RSU)</h3>
+    <h3>CECAM-RME (Residuos de Manejo Especial)</h3>
 </header>
 
 <div class="container mt-4">
 
     <!-- ENCABEZADO -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4>Registros de Residuos Sólidos</h4>
+        <h4>Registros Residuos de Manejo Especial</h4>
         <div class="d-flex gap-2">
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar Registro</button>
             <a href="index.php?view=dashboard_admin" class="btn btn-secondary">Regresar al Panel</a>
@@ -82,9 +82,9 @@ function mes_anio_ES($fecha)
             <thead class="table-success">
                 <tr>
                     <th>Mes</th>
+                    <th>Basura</th>
+                    <th>Basura orgánica</th>
                     <th>Papel</th>
-                    <th>Periódico</th>
-                    <th>Toallas</th>
                     <th>Cartón</th>
                     <th>PET</th>
                     <th>Otros Plásticos</th>
@@ -96,9 +96,9 @@ function mes_anio_ES($fecha)
                 <?php foreach ($registros as $r): ?>
                 <tr data-mes="<?= date('Y-m-d', strtotime($r['mes'])) ?>">
                     <td><strong><?= $r['mes'] ?></strong></td>
-                    <td><?= number_format($r['papel_kg'], 2) ?> kg</td>
-                    <td><?= number_format($r['periodico_kg'], 2) ?> kg</td>
-                    <td><?= number_format($r['toalla_manos_kg'], 2) ?> kg</td>
+                     <td><?= number_format($r['papel_kg'], 2) ?> kg</td>
+                    <td><?= number_format($r['basura_kg'], 2) ?> kg</td>
+                    <td><?= number_format($r['basura_organica_kg'], 2) ?> kg</td>
                     <td><?= number_format($r['carton_kg'], 2) ?> kg</td>
                     <td><?= number_format($r['pet_kg'], 2) ?> kg</td>
                     <td><?= number_format($r['otros_plasticos_kg'], 2) ?> kg</td>
@@ -128,8 +128,8 @@ function mes_anio_ES($fecha)
                     data-id="<?= $r['id'] ?>"
                     data-mes="<?= date('Y-m-d', strtotime($r['mes'])) ?>"
                     data-papel_kg="<?= $r['papel_kg'] ?>"
-                    data-periodico_kg="<?= $r['periodico_kg'] ?>"
-                    data-toalla_manos_kg="<?= $r['toalla_manos_kg'] ?>"
+                    data-basura_kg="<?= $r['basura_kg'] ?>"
+                    data-basura_organica_kg="<?= $r['basura_organica_kg'] ?>"
                     data-carton_kg="<?= $r['carton_kg'] ?>"
                     data-pet_kg="<?= $r['pet_kg'] ?>"
                     data-otros_plasticos_kg="<?= $r['otros_plasticos_kg'] ?>"
@@ -253,17 +253,17 @@ function mes_anio_ES($fecha)
                 <div class="row g-3">
                     <?php
                     $inputs = [
-                        'Mes'              => 'mes|date|required',
-                        'Papel (kg)'       => 'papel_kg|number|required',
-                        'Periódico (kg)'   => 'periodico_kg|number|required',
-                        'Toallas (kg)'     => 'toalla_manos_kg|number|required',
-                        'Cartón (kg)'      => 'carton_kg|number|required',
-                        'PET (kg)'         => 'pet_kg|number|required',
+                        'Mes'                  => 'mes|date|required',
+                        'Basura (kg)'          => 'basura_kg|number|required',
+                        'Basura orgánica (kg)' => 'basura_organica_kg|number|required',
+                        'Papel (kg)'           => 'papel_kg|number|required',
+                        'Cartón (kg)'          => 'carton_kg|number|required',
+                        'PET (kg)'             => 'pet_kg|number|required',
                         'Otros Plásticos (kg)' => 'otros_plasticos_kg|number|required',
-                        'Vidrio (kg)'      => 'vidrio_kg|number|required',
-                        'Aluminio (kg)'    => 'aluminio_kg|number|required',
-                        'Hojalata (kg)'    => 'hojalata_kg|number|required',
-                        'Fierro (kg)'      => 'fierro_kg|number|required'
+                        'Vidrio (kg)'          => 'vidrio_kg|number|required',
+                        'Aluminio (kg)'        => 'aluminio_kg|number|required',
+                        'Hojalata (kg)'        => 'hojalata_kg|number|required',
+                        'Fierro (kg)'          => 'fierro_kg|number|required'
                     ];
                     ?>
 
@@ -302,7 +302,7 @@ function mes_anio_ES($fecha)
     <div class="modal-dialog modal-lg">
         <form id="formEditarRsu" method="POST" action="index.php?view=rsu&action=editar" class="modal-content">
             <div class="modal-header bg-warning text-dark">
-                <h5>Editar Registro RSU</h5>
+                <h5>Editar Registro RME (Residuos de Manejo Especial)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 

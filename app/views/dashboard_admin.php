@@ -77,8 +77,8 @@ $idRol = $usuario['idRol']; // 1 = Admin, 2 = Personal, 3 = Invitado
             <div class="col">
                 <div class="card border-warning h-100">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Gestión de RSU</h5>
-                        <p class="card-text">Gestiona los residuos sólidos urbanos generados.</p>
+                        <h5 class="card-title">Gestión de RME</h5>
+                        <p class="card-text">Gestión  de Residuos de Manejo Especial.</p>
                         <a href="index.php?view=rsu" class="btn btn-warning">Entrar</a>
                     </div>
                 </div>

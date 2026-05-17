@@ -13,7 +13,7 @@
         <div class="hero-text">
             <h2>Protegiendo el medio ambiente con acciones reales</h2>
             <p>En <b>CECAM</b> trabajamos por un futuro sostenible, promoviendo proyectos ecológicos y educación ambiental en nuestras comunidades.</p>
-            <a href="#proyectos" class="btn">Conoce más</a>
+            <a href="index.php?view=conocemas" class="btn">Conoce más</a>
         </div>
         <img src="public/media/img1.jpg" alt="Imagen principal">
     </section>

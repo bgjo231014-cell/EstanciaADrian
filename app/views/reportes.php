@@ -38,8 +38,8 @@ if (!isset($_SESSION['usuario'])) {
         <div class="col">
             <div class="card h-100 shadow-sm border-warning">
                 <div class="card-body text-center">
-                    <h5 class="card-title text-warning">Residuos Sólidos (RSU)</h5>
-                    <p class="card-text">Materiales reciclados, CO₂ evitado y toneladas generadas.</p>
+                    <h5 class="card-title text-warning">Residuos de Manejo Especial (RME)</h5>
+                    <p class="card-text">Materiales reciclados, toneladas generadas.</p>
                     <a href="index.php?controller=reportes&action=rsu" class="btn btn-warning text-white">
                         Ver Reporte
                     </a>

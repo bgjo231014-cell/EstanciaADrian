@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tables.forEach(tbody => {
         [...tbody.rows].forEach(row => {
           const rowYear = row.getAttribute('data-year') || '';
+
           if (!year || rowYear.startsWith(year)) {
             row.style.display = '';
             found = true;
@@ -31,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (noResults) {
         noResults.style.display = (year && !found) ? 'block' : 'none';
       }
+
+      actualizarGrafica();
     });
   }
 
@@ -44,33 +47,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const get = (name) => btn.dataset[name] ?? "";
 
-      // ID real del registro
       const idField = document.getElementById("edit_id_comunidad");
       if (idField) idField.value = get("id_comunidad");
 
-      // Campos de texto
-      const editAno   = document.getElementById("edit_año");
-      const editMes1  = document.getElementById("edit_mes_1");
-      const editMes2  = document.getElementById("edit_mes_2");
-      const editMes3  = document.getElementById("edit_mes_3");
+      const editAno = document.getElementById("edit_año");
+      const editMes = document.getElementById("edit_mes");
+      const editDescripcion = document.getElementById("edit_descripcion");
 
-      if (editAno)  editAno.value  = get("año");
-      if (editMes1) editMes1.value = get("mes_1");
-      if (editMes2) editMes2.value = get("mes_2");
-      if (editMes3) editMes3.value = get("mes_3");
+      if (editAno) editAno.value = get("año");
+      if (editMes) editMes.value = get("mes");
+      if (editDescripcion) editDescripcion.value = get("descripcion");
 
-      // Todos los campos numéricos
       const numericFields = [
-        'admvo_1','admvo_2','admvo_3',
-        'ptc_1','ptc_2','ptc_3',
-        'honorarios_1','honorarios_2','honorarios_3',
-        'pa_1','pa_2','pa_3',
-        'jardin_1','jardin_2','jardin_3',
-        'limpieza_1','limpieza_2','limpieza_3',
-        'mantto_1','mantto_2','mantto_3',
-        'vigilancia_1','vigilancia_2','vigilancia_3',
-        'licenciatura_1','licenciatura_2','licenciatura_3',
-        'posgrado_1','posgrado_2','posgrado_3'
+        'admvos',
+        'ptcs',
+        'honorarios',
+        'pa',
+        'jardineros',
+        'limpieza',
+        'maestros',
+        'vigilancias',
+        'licenciaturas',
+        'posgrados'
       ];
 
       numericFields.forEach(f => {
@@ -82,65 +80,128 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==============================
-  // 3. GRÁFICA DE PASTEL DE TOTALES
+  // 3. GRÁFICA ACTUALIZADA
   // ==============================
-  // Usamos la ÚLTIMA tabla con clase .tabla-comunidad (la de "Totales y Promedios")
-  const tablas = document.querySelectorAll('.tabla-comunidad');
-  if (tablas.length > 0) {
-    const tablaTotales = tablas[tablas.length - 1]; // última tabla
-    const filasTotales = tablaTotales.querySelectorAll('tbody tr');
+  let graficaComunidad = null;
 
-    if (filasTotales.length > 0) {
-      // Tomamos la última fila (ej. año más reciente)
-      const ultimaFila = filasTotales[filasTotales.length - 1];
-      const celdas = ultimaFila.querySelectorAll('td');
+  function actualizarGrafica() {
+    const canvas = document.getElementById('graficaTotales');
 
-      if (celdas.length >= 3) {
-        const total1 = parseFloat(celdas[0].textContent) || 0;
-        const total2 = parseFloat(celdas[1].textContent) || 0;
-        const total3 = parseFloat(celdas[2].textContent) || 0;
+    if (!canvas || typeof Chart === 'undefined') {
+      return;
+    }
 
-        const canvas = document.getElementById('graficaTotales');
+    const filas = document.querySelectorAll('.tabla-comunidad tbody tr');
 
-        // Solo dibujamos si existe el canvas y Chart.js está cargado
-        if (canvas && typeof Chart !== 'undefined') {
-          new Chart(canvas, {
-            type: 'pie',
-            data: {
-              labels: [
-                'Total personal 1er mes',
-                'Total personal 2º mes',
-                'Total personal 3er mes'
-              ],
-              datasets: [{
-                label: 'Totales de personal',
-                data: [total1, total2, total3],
-                backgroundColor: [
-                  'rgba(138, 233, 14, 0.8)',
-                  'rgba(2, 63, 7, 0.7)',
-                  'rgba(75, 192, 91, 0.7)'
-                ],
-                borderColor: '#ffffff',
-                borderWidth: 2
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: 'right'
-                },
-                title: {
-                  display: true,
-                  text: 'Comparativa de Totales por Grupo'
-                }
+    let totalAdmvos = 0;
+    let totalPtcs = 0;
+    let totalHonorarios = 0;
+    let totalPa = 0;
+    let totalJardineros = 0;
+    let totalLimpieza = 0;
+    let totalMaestros = 0;
+    let totalVigilancias = 0;
+    let totalLicenciaturas = 0;
+    let totalPosgrados = 0;
+
+    filas.forEach(row => {
+      if (row.style.display === 'none') return;
+
+      totalAdmvos += parseFloat(row.dataset.admvos || 0);
+      totalPtcs += parseFloat(row.dataset.ptcs || 0);
+      totalHonorarios += parseFloat(row.dataset.honorarios || 0);
+      totalPa += parseFloat(row.dataset.pa || 0);
+      totalJardineros += parseFloat(row.dataset.jardineros || 0);
+      totalLimpieza += parseFloat(row.dataset.limpieza || 0);
+      totalMaestros += parseFloat(row.dataset.maestros || 0);
+      totalVigilancias += parseFloat(row.dataset.vigilancias || 0);
+      totalLicenciaturas += parseFloat(row.dataset.licenciaturas || 0);
+      totalPosgrados += parseFloat(row.dataset.posgrados || 0);
+    });
+
+    const datos = [
+      totalAdmvos,
+      totalPtcs,
+      totalHonorarios,
+      totalPa,
+      totalJardineros,
+      totalLimpieza,
+      totalMaestros,
+      totalVigilancias,
+      totalLicenciaturas,
+      totalPosgrados
+    ];
+
+    const tieneDatos = datos.some(valor => valor > 0);
+
+    if (!tieneDatos) {
+      return;
+    }
+
+    if (graficaComunidad) {
+      graficaComunidad.destroy();
+    }
+
+    graficaComunidad = new Chart(canvas, {
+      type: 'pie',
+      data: {
+        labels: [
+          'Admvos',
+          'PTCs',
+          'Honorarios',
+          'PA',
+          'Jardineros',
+          'Limpieza',
+          'Maestros',
+          'Vigilancias',
+          'Licenciaturas',
+          'Posgrados'
+        ],
+        datasets: [{
+          label: 'Distribución de comunidad',
+          data: datos,
+          backgroundColor: [
+            'rgba(46, 204, 113, 0.8)',
+            'rgba(52, 152, 219, 0.8)',
+            'rgba(155, 89, 182, 0.8)',
+            'rgba(241, 196, 15, 0.8)',
+            'rgba(230, 126, 34, 0.8)',
+            'rgba(26, 188, 156, 0.8)',
+            'rgba(231, 76, 60, 0.8)',
+            'rgba(52, 73, 94, 0.8)',
+            'rgba(127, 140, 141, 0.8)',
+            'rgba(22, 160, 133, 0.8)'
+          ],
+          borderColor: '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right'
+          },
+          title: {
+            display: true,
+            text: 'Distribución total de comunidad por tipo'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const valor = context.parsed;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const porcentaje = total > 0 ? ((valor / total) * 100).toFixed(1) : 0;
+                return `${context.label}: ${valor} (${porcentaje}%)`;
               }
             }
-          });
+          }
         }
       }
-    }
+    });
   }
+
+  actualizarGrafica();
 
 });
