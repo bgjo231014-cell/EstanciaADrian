@@ -45,6 +45,15 @@ $idRol = $usuario['idRol']; // 1 = Admin, 2 = Personal, 3 = Invitado
 
         <?php if ($idRol <= 2): ?>
             <div class="col">
+    <div class="card border-success h-100">
+        <div class="card-body text-center">
+            <h5 class="card-title">Gestión de Sanciones</h5>
+            <p class="card-text">Administra sanciones, horas liberadas y penalizaciones por tiempo.</p>
+            <a href="index.php?view=sanciones" class="btn btn-success">Entrar</a>
+        </div>
+    </div>
+</div>
+            <div class="col">
                 <div class="card border-primary h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Gestión de Capacitación</h5>

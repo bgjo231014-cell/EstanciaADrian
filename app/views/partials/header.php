@@ -46,6 +46,7 @@ if (is_numeric($usuario_rol)) {
             <div class="nav-buttons">
                 <a href="index.php?view=redes" class="btn btn-outline-light nav-btn">Redes sociales</a>
                 <a href="index.php?view=conocemas" class="btn btn-outline-light nav-btn">Conoce más</a>
+                <a href="index.php?view=consulta_sancion" class="btn btn-outline-light nav-btn">Consultar sanción</a>
 
                 <?php if ($usuario_id): ?>
                     <a href="index.php?view=descargas" class="btn btn-outline-light nav-btn">Descargas</a>

@@ -1,0 +1,197 @@
+.
+├── app
+│   ├── controllers
+│   │   ├── AguaController.php
+│   │   ├── AuthController.php
+│   │   ├── BackupController.php
+│   │   ├── CapacitacionController.php
+│   │   ├── CombustiblesController.php
+│   │   ├── ComunidadController.php
+│   │   ├── ConocemasController.php
+│   │   ├── DashboardController.php
+│   │   ├── DescargasController.php
+│   │   ├── ElectricidadController.php
+│   │   ├── HomeController.php
+│   │   ├── LoginController.php
+│   │   ├── ProgramacionController.php
+│   │   ├── RedesController.php
+│   │   ├── RegistroAguaController.php
+│   │   ├── ReportesController.php
+│   │   ├── RestoreController.php
+│   │   ├── RSUController.php
+│   │   ├── SancionController.php
+│   │   ├── UserController.php
+│   │   └── UsuarioController.php
+│   ├── libraries
+│   │   ├── dompdf
+│   │   │   ├── AUTHORS.md
+│   │   │   ├── autoload.inc.php
+│   │   │   ├── composer.json
+│   │   │   ├── lib
+│   │   │   ├── LICENSE.LGPL
+│   │   │   ├── phpunit.xml
+│   │   │   ├── README.md
+│   │   │   ├── src
+│   │   │   ├── vendor
+│   │   │   └── VERSION
+│   │   └── dompdf_autoload.php
+│   ├── models
+│   │   ├── AguaModel.php
+│   │   ├── AuthModel.php
+│   │   ├── BackupModel.php
+│   │   ├── CapacitacionModel.php
+│   │   ├── CombustiblesModel.php
+│   │   ├── ComunidadModel.php
+│   │   ├── ElectricidadModel.php
+│   │   ├── InvitadoModel.php
+│   │   ├── LoginModel.php
+│   │   ├── Model.php
+│   │   ├── RegistroAguaModel.php
+│   │   ├── ReportesModel.php
+│   │   ├── RestoreModel.php
+│   │   ├── RSUModel.php
+│   │   ├── SancionModel.php
+│   │   └── UsuarioModel.php
+│   └── views
+│       ├── agua.php
+│       ├── backup_restore.php
+│       ├── capacitacion.php
+│       ├── combustibles.php
+│       ├── comunidad.php
+│       ├── conocemas.php
+│       ├── consult.php
+│       ├── dashboard_admin.php
+│       ├── dashboard_personal.php
+│       ├── descargas.php
+│       ├── electricidad.php
+│       ├── from_insert.php
+│       ├── gestion_usuarios.php
+│       ├── home.php
+│       ├── login.php
+│       ├── partials
+│       │   ├── footer.php
+│       │   └── header.php
+│       ├── pdf
+│       │   └── pdf_reportes_general.php
+│       ├── redes.php
+│       ├── registro_invitado.php
+│       ├── reportes_agua.php
+│       ├── reportes_capacitacion.php
+│       ├── reportes_combustibles.php
+│       ├── reportes_comunidad.php
+│       ├── reportes_electricidad.php
+│       ├── reportes_general.php
+│       ├── reportes.php
+│       ├── reportes_rsu.php
+│       ├── rsu.php
+│       └── sanciones
+│           ├── admin.php
+│           └── consulta.php
+├── config
+│   ├── backups
+│   │   ├── nueva.sql
+│   │   ├── respaldo_2025-11-18_03-27-42.sql
+│   │   ├── respaldo_2025-11-18_03-48-26.sql
+│   │   ├── respaldo_2025-11-18_04-01-30.sql
+│   │   ├── respaldo_2025-11-18_05-18-46.sql
+│   │   ├── respaldo_2025-11-22_00-57-19.sql
+│   │   ├── respaldo_2025-11-22_00-57-31.sql
+│   │   ├── respaldo_2025-11-22_01-19-24.sql
+│   │   ├── respaldo_2025-11-24_03-38-04.sql
+│   │   ├── respaldo_2025-11-26_00-52-21.sql
+│   │   ├── respaldo_2025-11-26_01-14-17.sql
+│   │   └── respaldo_limpio.sql
+│   ├── database.php
+│   └── sanciones.sql
+├── estructura_proyecto.txt
+├── .git
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── HEAD
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── push-to-checkout.sample
+│   │   ├── sendemail-validate.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       └── remotes
+│   ├── objects
+│   │   ├── info
+│   │   └── pack
+│   │       ├── pack-86663095c0e0f1e0037201e010be60cdf59509ae.idx
+│   │       ├── pack-86663095c0e0f1e0037201e010be60cdf59509ae.pack
+│   │       └── pack-86663095c0e0f1e0037201e010be60cdf59509ae.rev
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       ├── remotes
+│       │   └── origin
+│       └── tags
+├── .gitignore
+├── index.php
+├── info.php
+├── listado.txt
+└── public
+    ├── css
+    │   ├── aguas.css
+    │   ├── capa.css
+    │   ├── combustibles.css
+    │   ├── comunidad.css
+    │   ├── dashboard.css
+    │   ├── ele.css
+    │   ├── electricidad.css
+    │   ├── home.css
+    │   ├── login.css
+    │   ├── main.css
+    │   ├── programacion.css
+    │   ├── publico.css
+    │   ├── registro_invitado.css
+    │   ├── restauracion.css
+    │   ├── rsu.css
+    │   ├── sanciones.css
+    │   ├── style.css
+    │   └── usuarios.css
+    ├── descargas
+    │   ├── grafica_general.png
+    │   ├── Reporte_General_2025-11-26_00-51-15.pdf
+    │   ├── Reporte_General_2025-11-26_00-51-40.pdf
+    │   ├── Reporte_General_2026-05-17_23-53-14.pdf
+    │   ├── Reporte_General_2026-05-17_23-58-13.pdf
+    │   ├── Reporte_General_2026-05-17_23-59-32.pdf
+    │   ├── Reporte_General_2026-05-18_00-23-23.pdf
+    │   ├── Reporte_General_2026-05-18_00-40-36.pdf
+    │   └── Reporte_General_2026-05-18_00-42-27.pdf
+    ├── js
+    │   ├── aguas.js
+    │   ├── backup-script.js
+    │   ├── capa.js
+    │   ├── combustibles.js
+    │   ├── comunidad.js
+    │   ├── electricidad.js
+    │   ├── login.js
+    │   ├── main.js
+    │   ├── reportes.js
+    │   └── rsu.js
+    └── media
+        ├── concemas1.jpg
+        └── logo.png
+
+36 directories, 159 files

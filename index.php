@@ -155,14 +155,11 @@ case 'gestion_usuarios':
     //  CONSULTA PÚBLICA DE SANCIONES
     // =======================================
     case 'consulta_sancion':
-
-    require_once "app/controllers/SancionController.php";
-
-    $controller = new SancionController();
-
+    require_once $controllersPath . 'SancionController.php';
+    $controller = new SancionController($connection);
     $controller->consultaPublica();
+    break;
 
-break;
                 // =======================================
     //  MODULO: GESTIÓN DE RSU
     // =======================================
