@@ -281,12 +281,15 @@ $sanciones = $sanciones ?? [];
 
 <?php endif; ?>
 
-<a
-    href="index.php?view=sanciones&action=historial&id=<?= $s['id_sancion'] ?>"
-    class="btn btn-sm btn-dark"
+<button
+    type="button"
+    class="btn btn-sm btn-dark btnHistorial"
+    data-id="<?= $s['id_sancion'] ?>"
+    data-bs-toggle="modal"
+    data-bs-target="#modalHistorial"
 >
     Historial
-</a>
+</button>
 
 <a
     href="index.php?view=sanciones&action=eliminar&id=<?= $s['id_sancion'] ?>"
@@ -489,6 +492,23 @@ $sanciones = $sanciones ?? [];
     </div>
 
 </div>
+<!-- MODAL HISTORIAL -->
+<div class="modal fade" id="modalHistorial" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">Historial de horas liberadas</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="historialContenido" class="table-responsive">
+                    Cargando historial...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- MODAL LIBERAR HORAS -->
 <div class="modal fade" id="modalLiberar" tabindex="-1">
     <div class="modal-dialog">
@@ -604,7 +624,69 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.dataset.alumno;
         });
     });
+document.querySelectorAll(".btnHistorial").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        const contenedor = document.getElementById("historialContenido");
 
+        contenedor.innerHTML = "Cargando historial...";
+
+        fetch(`index.php?view=sanciones&action=historial&id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data || data.length === 0) {
+                    contenedor.innerHTML = `
+                        <div class="alert alert-warning">
+                            No hay movimientos registrados.
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = `
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Entrada</th>
+                                <th>Salida</th>
+                                <th>Horas</th>
+                                <th>Actividad</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                data.forEach(m => {
+                    html += `
+                        <tr>
+                            <td>${m.fecha_servicio}</td>
+                            <td>${m.hora_entrada}</td>
+                            <td>${m.hora_salida}</td>
+                            <td>${m.horas_liberadas}</td>
+                            <td>${m.actividad_realizada ?? ""}</td>
+                            <td>${m.observaciones ?? ""}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                        </tbody>
+                    </table>
+                `;
+
+                contenedor.innerHTML = html;
+            })
+            .catch(() => {
+                contenedor.innerHTML = `
+                    <div class="alert alert-danger">
+                        Error al cargar el historial.
+                    </div>
+                `;
+            });
+    });
+});
 });
 </script>
 </body>

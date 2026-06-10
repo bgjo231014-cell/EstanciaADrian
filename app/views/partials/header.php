@@ -33,13 +33,13 @@ if (is_numeric($usuario_rol)) {
 <header class="cecam-header text-white">
     <div class="header-content">
         <!-- Logo -->
-        <div class="header-logo">
-            <img src="public/media/logo.png" alt="Logo CECAM" class="logo-img" width="150" height="150">
-            <div class="logo-icon"></div>
-            <div class="logo-text">
-                <p>Centro de Control y Gestión Ambiental</p>
-            </div>
-        </div>
+      <a href="index.php?view=home" class="header-logo text-white text-decoration-none">
+    <img src="public/media/logo.png" alt="Logo CECAM" class="logo-img" width="150" height="150">
+    <div class="logo-icon"></div>
+    <div class="logo-text">
+        <p>Centro de Control y Gestión Ambiental</p>
+    </div>
+</a>
 
         <!-- Navegación Central -->
         <nav class="header-nav">
