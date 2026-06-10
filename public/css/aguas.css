@@ -16,13 +16,6 @@ header {
     text-align: center;
 }
 
-@media (max-width: 768px) {
-    header {
-        padding: 1rem;
-        font-size: 1.2rem;
-    }
-}
-
 footer {
     color: #6c757d;
     font-size: 0.9rem;
@@ -51,15 +44,17 @@ footer {
     background-color: #fff;
 }
 
-.table th, .table td {
+.table th,
+.table td {
     padding: 0.75rem 1rem;
-    text-align: left;
+    text-align: center;
+    vertical-align: middle;
     border-bottom: 1px solid #dee2e6;
 }
 
 .table thead th {
-    background-color: #198754;
-    color: #fff;
+    background-color: #198754 !important;
+    color: #fff !important;
     font-weight: 600;
 }
 
@@ -108,12 +103,43 @@ footer {
     border-color: #ffc720;
 }
 
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
 /* ==========================
-   Inputs y búsqueda
+   Inputs y búsquedas individuales
    ========================== */
 .input-group-text {
     background-color: #e9ecef;
     border: 1px solid #ced4da;
+    font-weight: 600;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
 }
 
 .form-text.text-muted {
@@ -121,15 +147,45 @@ footer {
     margin-left: 0.5rem;
 }
 
-/* Highlight filas buscadas */
-.table tbody tr.highlight {
-    background-color: #f0f9f4 !important;
-    animation: highlightSearch 1s ease;
+/* Contenedor de cada buscador */
+.buscador-tabla {
+    max-width: 650px;
 }
 
+/* Input de tipo mes */
+.buscador-tabla input[type="month"] {
+    cursor: pointer;
+}
+
+/* Fila que se oculta cuando no coincide */
+.fila-oculta {
+    display: none !important;
+}
+
+/* Fila que sí coincide con la búsqueda */
+.fila-buscada {
+    background-color: #f0f9f4 !important;
+    animation: highlightSearch 0.5s ease;
+}
+
+/* Fila cuando no hay resultados */
+.no-resultados td {
+    text-align: center;
+    color: #6c757d;
+    padding: 1.5rem;
+    font-style: italic;
+    background-color: #fff;
+}
+
+/* Animación de búsqueda */
 @keyframes highlightSearch {
-    0% { background-color: #e8f5e8; }
-    100% { background-color: transparent; }
+    0% {
+        background-color: #d1e7dd;
+    }
+
+    100% {
+        background-color: #f0f9f4;
+    }
 }
 
 /* ==========================
@@ -145,26 +201,71 @@ footer {
     color: #212529;
 }
 
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-body label {
+    font-weight: 500;
+}
+
+/* ==========================
+   Separadores
+   ========================== */
+hr {
+    border: none;
+    border-top: 2px solid #dee2e6;
+}
+
 /* ==========================
    Responsividad
    ========================== */
 @media (max-width: 768px) {
-    .table-responsive {
-        overflow-x: auto;
+    header {
+        padding: 1rem;
+        font-size: 1.2rem;
     }
-    
+
+    .container {
+        padding: 0 0.8rem;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
     .d-flex.justify-content-between {
         flex-direction: column;
+        align-items: stretch !important;
         gap: 1rem;
     }
-    
+
+    .d-flex.gap-2 {
+        flex-direction: column;
+        width: 100%;
+    }
+
     .btn {
         width: 100% !important;
     }
-    
-    .btn-group {
-        display: flex;
+
+    .buscador-tabla {
+        max-width: 100%;
         flex-direction: column;
-        gap: 0.5rem;
+    }
+
+    .buscador-tabla .input-group-text,
+    .buscador-tabla .form-control,
+    .buscador-tabla .btn {
+        width: 100%;
+        border-radius: 5px !important;
+        margin-bottom: 0.4rem;
+    }
+
+    .form-text.text-muted {
+        display: block;
+        margin-left: 0;
     }
 }

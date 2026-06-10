@@ -84,6 +84,7 @@ if (is_numeric($usuario_rol)) {
             <?php endif; ?>
         </div>
 
+        
     </div>
 </header>
 
