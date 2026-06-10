@@ -8,10 +8,6 @@
     <div class="card shadow mb-4">
         <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Resumen por Año</h5>
-
-            <a href="index.php?view=dashboard_admin" class="btn btn-secondary">
-                Regresar al Panel
-            </a>
         </div>
 
         <div class="card-body">

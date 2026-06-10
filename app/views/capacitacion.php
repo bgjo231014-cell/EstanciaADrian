@@ -45,7 +45,6 @@ $capacitaciones = $capacitaciones ?? [];
   </div>
 
   <!-- TABLA PRINCIPAL -->
-  <!-- TABLA PRINCIPAL 1 -->
 <h5 class="bg-warning text-dark p-2 rounded">Capacitaciones - Datos principales</h5>
 
 <div class="table-responsive mb-4">
